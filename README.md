@@ -78,7 +78,7 @@ dotnet publish -c Release -r osx-x64
 | PUT    | Zamień                |
 | DELETE | Usuń                  |
 | PATCH  | Zmodyfikuj częściowo  |
-
+| HEAD   | Czy istnieje          |
 
 
 
