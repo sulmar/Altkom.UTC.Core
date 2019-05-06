@@ -53,10 +53,10 @@ namespace Altkom.UTC.Core.Service.Controllers
             return Ok(device);
         }
 
-        
-        [Route("{color}&{IsActive}")]
+
+
         [HttpGet()]
-        public IActionResult Get(string color, bool isActive)
+        public IActionResult Get([FromQuery] string color, [FromQuery] bool isActive)
         {
             throw new NotImplementedException();
         }
