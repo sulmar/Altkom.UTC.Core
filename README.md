@@ -67,3 +67,18 @@ dotnet publish -c Release -r linux-x64
 ~~~ bash
 dotnet publish -c Release -r osx-x64
 ~~~
+
+
+## REST API
+
+| Akcja  | Opis                  |
+|--------|-----------------------|
+| GET    | Pobierz               |
+| POST   | Utwórz                |
+| PUT    | Zamień                |
+| DELETE | Usuń                  |
+| PATCH  | Zmodyfikuj częściowo  |
+
+
+
+
