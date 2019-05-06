@@ -82,3 +82,15 @@ dotnet publish -c Release -r osx-x64
 
 
 
+### Włączenie obsługi XML
+
+Plik Startup.cs
+
+~~~ csharp
+ public void ConfigureServices(IServiceCollection services)
+        {
+            services
+                .AddMvc(options => options.RespectBrowserAcceptHeader = true)
+                .AddXmlSerializerFormatters();
+        }
+~~~
