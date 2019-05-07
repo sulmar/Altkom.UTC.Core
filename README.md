@@ -127,3 +127,48 @@ public void ConfigureServices(IServiceCollection services)
      });
 }
 ~~~
+
+
+## Docker
+
+### Hello World
+``` bash
+docker run hello-world
+```
+
+### Uruchomienie polecenia w kontenerze 
+docker run ubuntu ls -l
+
+### Uruchomienie basha w kontenerze
+
+``` bash
+docker run -it ubuntu bash
+```
+
+### Przydatne komendy
+- ``` docker images ``` - lista wszystkich obrazów na twojej maszynie
+- ``` docker pull <image> ``` - pobranie obrazu
+- ``` docker run <image> ``` - uruchomienie obrazu (pobiera jeśli nie ma)
+- ``` docker ps ``` - lista wszystkich uruchomionych kontenerów na twojej maszynie
+- ``` docker ps -a``` - lista wszystkich przyłączonych ale nie uruchomionych kontenerów
+- ``` docker start <containter_name> ``` - uruchomienie kontenera wg nazwy
+- ``` docker stop <containter_name> ``` - zatrzymanie kontenera wg nazwy
+
+### Konteneryzacja aplikacji .NET Core
+
+* Utwórz plik Dockerfile
+
+~~~
+FROM microsoft/dotnet:2.0-sdk
+WORKDIR /app
+
+# copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
+
+# copy and build everything else
+COPY . ./
+RUN dotnet publish -c Release -o out
+ENTRYPOINT ["dotnet", "out/Hello.dll"]
+~~~
+
