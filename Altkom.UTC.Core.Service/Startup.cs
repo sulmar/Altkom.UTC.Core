@@ -64,6 +64,10 @@ namespace Altkom.UTC.Core.Service
                 .AddJsonOptions(options =>
                    {
                        options.SerializerSettings.Converters.Add(new StringEnumConverter(camelCaseText: true));
+
+                       // skip null values
+                       options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                       
                    })
                 //.AddYamlFile("appsettings.yml")
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

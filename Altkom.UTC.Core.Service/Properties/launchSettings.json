@@ -20,7 +20,7 @@
     "Altkom.UTC.Core.Service": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/devices",
+      "launchUrl": "api/customers",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

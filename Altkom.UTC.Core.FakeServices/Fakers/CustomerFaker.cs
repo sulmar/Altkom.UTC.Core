@@ -18,6 +18,7 @@ namespace Altkom.UTC.Core.FakeServices.Fakers
             RuleFor(p => p.Birthday, f => f.Person.DateOfBirth);
             RuleFor(p => p.Email, f => f.Person.Email);
             Ignore(p => p.IsDeleted);
+            Ignore(p => p.Description);
         }
     }
 }
