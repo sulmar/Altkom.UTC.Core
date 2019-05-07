@@ -106,11 +106,7 @@ public void ConfigureServices(IServiceCollection services)
  {
  services.AddJsonOptions(options =>
                    {
-                       options.SerializerSettings.Converters.Add(new StringEnumConverter(camelCaseText: true));
-
-                       // skip null values
-                       options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-                       
+                       options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;            
                    })
 }
 ~~~
