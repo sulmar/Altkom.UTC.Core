@@ -110,3 +110,19 @@ public void ConfigureServices(IServiceCollection services)
                    })
 }
 ~~~
+
+### Serializacja enum jako tekst 
+
+Plik Startup.cs
+
+
+~~~ csharp
+public void ConfigureServices(IServiceCollection services)
+ {
+
+services.AddJsonOptions(options =>
+                   {
+                       options.SerializerSettings.Converters.Add(new StringEnumConverter(camelCaseText: true));                       
+                   })
+}
+~~~
