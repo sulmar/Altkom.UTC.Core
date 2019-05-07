@@ -1,6 +1,7 @@
 ﻿using Altkom.UTC.Core.IServices;
 using Altkom.UTC.Core.Models.SearchCriteria;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,11 @@ namespace Altkom.UTC.Core.Service.Controllers
     {
         private readonly ICustomersService customersService;
 
-        public CustomersController(ICustomersService customersService)
+        private readonly ILogger logger;
+
+        public CustomersController(ILogger<CustomersController> logger, ICustomersService customersService)
         {
+            this.logger = logger;
             this.customersService = customersService;
         }
 
@@ -41,6 +45,8 @@ namespace Altkom.UTC.Core.Service.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery] CustomerSearchCriteria criteria)
         {
+            logger.LogInformation($"Search by {criteria.FirstName} {criteria.From} {criteria.To}");
+
             var customers = customersService.Get(criteria);
 
             return Ok(customers);

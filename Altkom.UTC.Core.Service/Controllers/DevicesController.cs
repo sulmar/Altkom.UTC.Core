@@ -53,6 +53,23 @@ namespace Altkom.UTC.Core.Service.Controllers
             return Ok(device);
         }
 
+        [Route("~/api/v1/customers/{customerId}/devices")]
+        [HttpGet]
+        public IActionResult GetByCustomerV1(int customerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        [Route("~/api/customers/{customerId}/devices")]
+        [HttpGet]
+        public IActionResult GetByCustomerV2(int customerId)
+        {
+
+            var request = this.Request;
+
+            throw new NotImplementedException();
+        }
+
 
 
         [HttpGet()]
