@@ -88,11 +88,11 @@ Plik Startup.cs
 
 ~~~ csharp
  public void ConfigureServices(IServiceCollection services)
-        {
-            services
-                .AddMvc(options => options.RespectBrowserAcceptHeader = true)
-                .AddXmlSerializerFormatters();
-        }
+ {
+     services
+         .AddMvc(options => options.RespectBrowserAcceptHeader = true)
+         .AddXmlSerializerFormatters();
+ }
 ~~~
 
 
@@ -103,11 +103,12 @@ Plik Startup.cs
 ~~~ csharp
 
 public void ConfigureServices(IServiceCollection services)
- {
- services.AddJsonOptions(options =>
-                   {
-                       options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;            
-                   })
+{
+  services
+    .AddJsonOptions(options =>
+    {
+        options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;            
+    });
 }
 ~~~
 
@@ -118,11 +119,11 @@ Plik Startup.cs
 
 ~~~ csharp
 public void ConfigureServices(IServiceCollection services)
- {
-
-services.AddJsonOptions(options =>
-                   {
-                       options.SerializerSettings.Converters.Add(new StringEnumConverter(camelCaseText: true));                       
-                   })
+{
+  services
+    .AddJsonOptions(options =>
+     {
+         options.SerializerSettings.Converters.Add(new StringEnumConverter(camelCaseText: true));                       
+     });
 }
 ~~~
