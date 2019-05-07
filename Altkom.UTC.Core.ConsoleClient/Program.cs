@@ -10,7 +10,7 @@ namespace Altkom.UTC.Core.ConsoleClient
         {
             Console.WriteLine("Hello World!");
 
-            IDevicesService devicesService = new FakeDevicesService();
+            IDevicesService devicesService = new FakeDevicesService(new FakeServices.Fakers.DeviceFaker());
 
             var devices = devicesService.Get();
 

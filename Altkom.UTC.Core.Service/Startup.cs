@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Converters;
 
 namespace Altkom.UTC.Core.Service
 {
@@ -29,13 +30,19 @@ namespace Altkom.UTC.Core.Service
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IDevicesService, FakeDevicesService>();
+            services.AddSingleton<ICustomersService, FakeCustomersService>();
             services.AddSingleton<DeviceFaker>();
+            services.AddSingleton<CustomerFaker>();
 
             // services.AddScoped<IDevicesService, DbDevicesService>();
 
             services
                 .AddMvc(options => options.RespectBrowserAcceptHeader = true)
                 .AddXmlSerializerFormatters()
+                .AddJsonOptions(options =>
+                   {
+                       options.SerializerSettings.Converters.Add(new StringEnumConverter(camelCaseText: true));
+                   })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
