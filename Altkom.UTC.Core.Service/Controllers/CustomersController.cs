@@ -1,4 +1,5 @@
 ﻿using Altkom.UTC.Core.IServices;
+using Altkom.UTC.Core.Models.SearchCriteria;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,13 +18,13 @@ namespace Altkom.UTC.Core.Service.Controllers
             this.customersService = customersService;
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var customers = customersService.Get();
+        //[HttpGet]
+        //public IActionResult Get()
+        //{
+        //    var customers = customersService.Get();
 
-            return Ok(customers);
-        }
+        //    return Ok(customers);
+        //}
 
         [HttpGet("{id:int}")]
         public IActionResult Get(int id)
@@ -35,6 +36,14 @@ namespace Altkom.UTC.Core.Service.Controllers
 
 
             return Ok(customer);
+        }
+
+        [HttpGet]
+        public IActionResult Get([FromQuery] CustomerSearchCriteria criteria)
+        {
+            var customers = customersService.Get(criteria);
+
+            return Ok(customers);
         }
     }
 }
