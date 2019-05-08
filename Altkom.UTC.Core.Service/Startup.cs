@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Altkom.UTC.Core.DbServices;
 using Altkom.UTC.Core.FakeServices;
 using Altkom.UTC.Core.FakeServices.Fakers;
 using Altkom.UTC.Core.IServices;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -53,6 +55,10 @@ namespace Altkom.UTC.Core.Service
             var option2 = Configuration["MyComplexOptions:MyOption2"];
 
             string connectionString = Configuration.GetConnectionString("MyConnection");
+
+            // dotnet add package Microsoft.EntityFrameworkCore
+            // dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+            services.AddDbContext<UTCContext>(options => options.UseSqlServer(connectionString));
 
             // services.AddScoped<IDevicesService, DbDevicesService>();
 

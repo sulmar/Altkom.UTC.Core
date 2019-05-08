@@ -10,11 +10,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Altkom.UTC.Core.DbServices\Altkom.UTC.Core.DbServices.csproj" />
     <ProjectReference Include="..\Altkom.UTC.Core.FakeServices\Altkom.UTC.Core.FakeServices.csproj" />
     <ProjectReference Include="..\Altkom.UTC.Core.IServices\Altkom.UTC.Core.IServices.csproj" />
   </ItemGroup>
