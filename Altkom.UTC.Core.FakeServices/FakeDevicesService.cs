@@ -2,6 +2,7 @@
 using Altkom.UTC.Core.IServices;
 using Altkom.UTC.Core.Models;
 using Bogus;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,13 @@ namespace Altkom.UTC.Core.FakeServices
 
     public class FakeDevicesService : FakeEntitiesService<Device>, IDevicesService
     {
-        public FakeDevicesService(DeviceFaker faker) : base(faker)
+        //public FakeDevicesService(IOptions<MyOptions> options, DeviceFaker faker) 
+        //    : base(options, faker)
+        //{
+        //}
+
+        public FakeDevicesService(MyOptions options, DeviceFaker faker)
+           : base(options, faker)
         {
         }
 

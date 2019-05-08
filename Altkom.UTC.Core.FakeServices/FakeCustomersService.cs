@@ -4,15 +4,23 @@ using Altkom.UTC.Core.FakeServices.Fakers;
 using Altkom.UTC.Core.IServices;
 using Altkom.UTC.Core.Models;
 using Altkom.UTC.Core.Models.SearchCriteria;
+using Microsoft.Extensions.Options;
 
 namespace Altkom.UTC.Core.FakeServices
 {
     public class FakeCustomersService : FakeEntitiesService<Customer>,
         ICustomersService
     {
-        public FakeCustomersService(CustomerFaker faker) : base(faker)
+        //public FakeCustomersService
+        //    (IOptions<MyOptions> options, CustomerFaker faker) : base(options, faker)
+        //{
+        //}
+
+        public FakeCustomersService
+            (MyOptions options, CustomerFaker faker) : base(options, faker)
         {
         }
+
 
         public IEnumerable<Customer> Get(CustomerSearchCriteria searchCriteria)
         {

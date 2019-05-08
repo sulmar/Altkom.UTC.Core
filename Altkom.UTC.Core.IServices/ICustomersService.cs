@@ -15,4 +15,10 @@ namespace Altkom.UTC.Core.IServices
 
 
 
+    public interface ICustomersServiceAsync : IEntiesServiceAsync<Customer>
+    {
+
+    }
+
+
 }

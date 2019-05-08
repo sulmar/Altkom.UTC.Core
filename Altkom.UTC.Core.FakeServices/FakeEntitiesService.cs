@@ -1,6 +1,7 @@
 ﻿using Altkom.UTC.Core.IServices;
 using Altkom.UTC.Core.Models;
 using Bogus;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,32 @@ using System.Linq;
 namespace Altkom.UTC.Core.FakeServices
 {
 
+    public class MyOptions
+    {
+        public int Quantity { get; set; }
+    }
+
     public class FakeEntitiesService<T> : IEntiesService<T>
         where T : Base
     {
         protected readonly ICollection<T> entites;
 
-        public FakeEntitiesService(Faker<T> faker)
+        private readonly MyOptions options;
+
+        // dotnet add package Microsoft.Extensions.Options
+        //public FakeEntitiesService(IOptions<MyOptions> options, Faker<T> faker)
+        //{
+        //    this.options = options.Value;
+
+        //    entites = faker.Generate(this.options.Quantity);
+        //}
+
+        public FakeEntitiesService(MyOptions options, Faker<T> faker)
         {
-            entites = faker.Generate(100);
+            this.options = options;
+
+            entites = faker.Generate(this.options.Quantity);
+
         }
 
         public virtual void Add(T entity) => entites.Add(entity);

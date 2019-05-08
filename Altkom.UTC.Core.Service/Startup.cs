@@ -56,6 +56,17 @@ namespace Altkom.UTC.Core.Service
 
             // services.AddScoped<IDevicesService, DbDevicesService>();
 
+            // Wstrzykiwanie poprzez IOptions<T>
+
+            // services.AddOptions();
+            // services.Configure<MyOptions>(Configuration.GetSection("MyOptions"));
+
+
+            // Bezposrednie wstrzykiwanie T
+            var config = new MyOptions();
+            Configuration.GetSection("MyOptions").Bind(config);
+            services.AddSingleton(config);
+
             // dotnet add package Microsoft.Extensions.Configuration.Yaml
 
             services

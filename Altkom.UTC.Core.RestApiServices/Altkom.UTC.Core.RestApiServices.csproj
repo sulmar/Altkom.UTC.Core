@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="27.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Altkom.UTC.Core.IServices\Altkom.UTC.Core.IServices.csproj" />
+    <ProjectReference Include="..\Altkom.UTC.Core.Models\Altkom.UTC.Core.Models.csproj" />
   </ItemGroup>
 
 </Project>

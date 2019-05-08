@@ -1,4 +1,5 @@
 ﻿using Altkom.UTC.Core.IServices;
+using Altkom.UTC.Core.Models;
 using Altkom.UTC.Core.Models.SearchCriteria;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace Altkom.UTC.Core.Service.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class CustomersController : ControllerBase
     {
         private readonly ICustomersService customersService;
@@ -50,6 +52,16 @@ namespace Altkom.UTC.Core.Service.Controllers
             var customers = customersService.Get(criteria);
 
             return Ok(customers);
+        }
+
+
+        [HttpPost]
+        public IActionResult Post( Customer customer)
+        {
+            customersService.Add(customer);
+
+            return CreatedAtRoute(new { Id = customer.Id }, customer);
+
         }
     }
 }
