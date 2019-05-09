@@ -215,6 +215,7 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 - ``` dotnet ef database drop ``` - usunięcie bazy danych
 - ``` dotnet ef dbcontext info ``` - wyświetlenie informacji o DbContext (provider, nazwa bazy danych, źródło)
 - ``` dotnet ef dbcontext list ``` - wyświetlenie listy DbContextów
+- ``` dotnet ef dbcontext scaffold {connectionstring} Microsoft.EntityFrameworkCore.SqlServer -o Models ``` - wygenerowanie modelu na podstawie bazy danych
 
 ## Autentyfikacja
 
