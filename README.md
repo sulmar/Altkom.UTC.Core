@@ -128,6 +128,19 @@ public void ConfigureServices(IServiceCollection services)
 }
 ~~~
 
+### Zapobieganie cyklicznej serializacji
+
+Plik Startup.cs
+
+~~~ csharp
+public void ConfigureServices(IServiceCollection services)
+{
+  services
+      .AddJsonOptions(options =>
+         {
+             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+         });
+   } 
 
 ## Docker
 
@@ -180,4 +193,3 @@ Headers
 | Key   | Value  |
 |---|---|
 | Authorization | Basic {Base64(login:password)}  |
-|   |   |   |
