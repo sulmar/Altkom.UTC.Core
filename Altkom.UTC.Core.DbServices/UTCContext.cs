@@ -13,14 +13,15 @@ namespace Altkom.UTC.Core.DbServices
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Device> Devices { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public UTCContext(DbContextOptions<UTCContext> options)
             : base(options)
         {
 
-            this.Database.EnsureCreated();
+            // this.Database.EnsureCreated();
 
-            // this.Database.Migrate();
+             
 
         }
 

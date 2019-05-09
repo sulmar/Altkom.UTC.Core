@@ -15,6 +15,11 @@ namespace Altkom.UTC.Core.DbServices.Configurations
              .Property(p => p.Name)
              .HasMaxLength(100)
              .IsUnicode(false);
+
+            builder
+             .Property(p => p.Model)
+             .HasMaxLength(100)
+             .IsRequired(true);
         }
     }
 }

@@ -9,5 +9,7 @@ namespace Altkom.UTC.Core.Models
         public bool IsActive { get; set; }
         public string Color { get; set; }
         public Customer Customer { get; set; }
+        public Guid SerialNumber { get; set; }
+        public string Model { get; set; }
     }
 }

@@ -1,19 +1,26 @@
 ﻿using Altkom.UTC.Core.IServices;
 using Altkom.UTC.Core.Models;
 using Altkom.UTC.Core.Models.SearchCriteria;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace Altkom.UTC.Core.Service.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
     {
+        // IIdentity
+
+            // IPrincipal
+
         private readonly ICustomersService customersService;
 
         private readonly ILogger logger;
@@ -45,8 +52,14 @@ namespace Altkom.UTC.Core.Service.Controllers
         }
 
         [HttpGet]
+        //[AllowAnonymous]
         public IActionResult Get([FromQuery] CustomerSearchCriteria criteria)
         {
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                return Unauthorized();
+            }
+
             logger.LogInformation($"Search by {criteria.FirstName} {criteria.From} {criteria.To}");
 
             var customers = customersService.Get(criteria);
@@ -62,6 +75,15 @@ namespace Altkom.UTC.Core.Service.Controllers
 
             return CreatedAtRoute(new { Id = customer.Id }, customer);
 
+        }
+
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            customersService.Remove(id);
+
+            return Ok();
         }
     }
 }

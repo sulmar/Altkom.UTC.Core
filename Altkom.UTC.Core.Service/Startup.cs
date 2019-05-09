@@ -6,8 +6,11 @@ using Altkom.UTC.Core.DbServices;
 using Altkom.UTC.Core.FakeServices;
 using Altkom.UTC.Core.FakeServices.Fakers;
 using Altkom.UTC.Core.IServices;
+using Altkom.UTC.Core.Service.Handlers;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -45,12 +48,18 @@ namespace Altkom.UTC.Core.Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IDevicesService, FakeDevicesService>();
+            //services.AddSingleton<IDevicesService, FakeDevicesService>();
             //services.AddSingleton<ICustomersService, FakeCustomersService>();
 
+            services.AddScoped<IDevicesService, DbDevicesService>();
             services.AddScoped<ICustomersService, DbCustomersService>();
+            services.AddScoped<IUsersService, DbUsersService>();
             services.AddSingleton<DeviceFaker>();
             services.AddSingleton<CustomerFaker>();
+
+            services.AddAuthentication("BasicAuthorization")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthorization", null);
+
 
             var quantity = Configuration["Quantity"];
 
@@ -86,7 +95,10 @@ namespace Altkom.UTC.Core.Service
 
                        // skip null values
                        options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-                       
+
+                       options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+
                    })
                 //.AddYamlFile("appsettings.yml")
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -109,7 +121,9 @@ namespace Altkom.UTC.Core.Service
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
+
+            app.UseAuthentication();
             app.UseMvc();
 
             app.UseSwagger();
