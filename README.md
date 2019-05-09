@@ -174,6 +174,45 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
  }           
 ~~~
 
+
+## Asynchroniczność
+
+### Main asynchroniczny w C# 7.0
+
+Program.cs
+
+~~~ csharp
+
+static void Main(string[] args) => MainAsync(args).GetAwaiter().GetResult();
+
+        static async Task MainAsync(string[] args)
+        {
+                await DoWorkAsync();
+         }
+~~~
+
+### Main asynchroniczny w C# 7.2
+
+Project.csproj
+
+~~~ xml
+
+<PropertyGroup>
+  <LangVersion>latest</LangVersion>
+</PropertyGroup>
+ 
+~~~
+
+Program.cs
+
+~~~ csharp
+static async Task Main(string[] args)
+ {
+     await DoWorkAsync();
+ }
+
+~~~
+
 ## ngrok
 
 Uruchomienie
