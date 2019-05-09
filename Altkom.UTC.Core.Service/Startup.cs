@@ -46,7 +46,9 @@ namespace Altkom.UTC.Core.Service
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IDevicesService, FakeDevicesService>();
-            services.AddSingleton<ICustomersService, FakeCustomersService>();
+            //services.AddSingleton<ICustomersService, FakeCustomersService>();
+
+            services.AddScoped<ICustomersService, DbCustomersService>();
             services.AddSingleton<DeviceFaker>();
             services.AddSingleton<CustomerFaker>();
 
@@ -55,7 +57,7 @@ namespace Altkom.UTC.Core.Service
             var option2 = Configuration["MyComplexOptions:MyOption2"];
 
             string connectionString = Configuration.GetConnectionString("MyConnection");
-
+        
             // dotnet add package Microsoft.EntityFrameworkCore
             // dotnet add package Microsoft.EntityFrameworkCore.SqlServer
             services.AddDbContext<UTCContext>(options => options.UseSqlServer(connectionString));

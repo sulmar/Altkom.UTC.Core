@@ -1,4 +1,5 @@
-﻿using Altkom.UTC.Core.Models;
+﻿using Altkom.UTC.Core.DbServices.Configurations;
+using Altkom.UTC.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,20 @@ namespace Altkom.UTC.Core.DbServices
         public UTCContext(DbContextOptions<UTCContext> options)
             : base(options)
         {
+
+            this.Database.EnsureCreated();
+
+            // this.Database.Migrate();
+
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .ApplyConfiguration(new CustomerConfiguration())
+                .ApplyConfiguration(new DeviceConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
