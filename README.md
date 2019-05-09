@@ -147,7 +147,6 @@ public void ConfigureServices(IServiceCollection services)
 
 ## Generowanie dokumentacji
 
-
 ### Instalacja
 
 ~~~ bash
@@ -174,6 +173,26 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
  }           
 ~~~
+
+## ngrok
+
+Uruchomienie
+
+``` bash
+ngrok http 5000
+```
+
+Interfejs webowy
+
+```
+http://127.0.0.1:4040
+```
+
+API
+
+```
+http://127.0.0.1:4040/api
+```
 
 
 ## Docker
