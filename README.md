@@ -145,6 +145,36 @@ public void ConfigureServices(IServiceCollection services)
    } 
 ~~~
 
+## Generowanie dokumentacji
+
+
+### Instalacja
+
+~~~ bash
+dotnet add TodoApi.csproj package Swashbuckle.AspNetCore
+~~~
+
+### Konfiguracja
+
+Plik Startup.cs
+
+~~~ csharp
+public void ConfigureServices(IServiceCollection services)
+{
+ services
+      .AddSwaggerGen(c => c.SwaggerDoc("v1", new Info { Title = "My Api", Version = "1.0" }));         
+} 
+~~~
+
+~~~ csharp
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+   app.UseSwagger();
+
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
+ }           
+~~~
+
 
 ## Docker
 
