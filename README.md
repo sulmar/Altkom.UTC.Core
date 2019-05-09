@@ -172,3 +172,12 @@ RUN dotnet publish -c Release -o out
 ENTRYPOINT ["dotnet", "out/Hello.dll"]
 ~~~
 
+## Autentyfikacja
+
+### Basic
+Headers 
+
+| Key   | Value  |
+|---|---|
+| Authorization | Basic {Base64(login:password)}  |
+|   |   |   |
