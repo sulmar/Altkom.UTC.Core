@@ -118,6 +118,7 @@ Plik Startup.cs
 
 
 ~~~ csharp
+
 public void ConfigureServices(IServiceCollection services)
 {
   services
@@ -126,6 +127,7 @@ public void ConfigureServices(IServiceCollection services)
          options.SerializerSettings.Converters.Add(new StringEnumConverter(camelCaseText: true));                       
      });
 }
+
 ~~~
 
 ### Zapobieganie cyklicznej serializacji
@@ -141,6 +143,8 @@ public void ConfigureServices(IServiceCollection services)
              options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
          });
    } 
+~~~
+
 
 ## Docker
 
