@@ -16,6 +16,7 @@ namespace Altkom.UTC.Core.FakeServices.Fakers
             RuleFor(p => p.Firmware, f => f.System.Version().ToString());
             RuleFor(p => p.IsActive, f => f.Random.Bool(0.8f));
             Ignore(p => p.Color);
+            Ignore(p => p.Customer);
         }
     }
 }
