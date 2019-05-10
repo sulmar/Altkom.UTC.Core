@@ -337,7 +337,7 @@ appsettings.json
     "HealthChecks": [
       {
         "Name": "Http and UI on single project",
-        "Uri": "http://localhost:5000/healthz"
+        "Uri": "http://localhost:5000/health"
       }
     ],
     "Webhooks": [],
