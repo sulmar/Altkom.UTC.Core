@@ -433,6 +433,25 @@ appsettings.json
 
 Wskazówka: Przejdź na http://localhost:5000/healthchecks-ui aby zobaczyc panel
 
+### Kondycja SQL Server
+
+~~~ bash
+dotnet add package AspNetCore.HealthChecks.SqlServer 
+~~~
+
+Startup.cs
+
+~~~ csharp
+
+public void ConfigureServices(IServiceCollection services)
+{
+ services.AddHealthChecksUI()
+    .AddSqlServer(Configuration.GetConnectionStrings("MyConnection");
+}
+
+~~~
+
+
 ### Kondycja DbContext
 
 ~~~ bash
