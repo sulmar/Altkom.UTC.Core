@@ -346,3 +346,7 @@ appsettings.json
   }
   
 ~~~  
+
+## Walidacja
+
+
