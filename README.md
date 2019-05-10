@@ -433,6 +433,30 @@ appsettings.json
 
 Wskazówka: Przejdź na http://localhost:5000/healthchecks-ui aby zobaczyc panel
 
+### Kondycja DbContext
+
+~~~ bash
+dotnet add package Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore
+~~~
+
+Startup.cs
+
+~~~ csharp
+
+public void ConfigureServices(IServiceCollection services)
+{
+  services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection"));
+            
+    services.AddHealthChecks()
+            .AddDbContextCheck<AppDbContext>();
+
+}
+
+~~~
+
+
+
+
 ## Walidacja
 
 
