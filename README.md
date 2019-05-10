@@ -326,3 +326,23 @@ Headers
 
 https://github.com/sulmar/dotnet-core-jwt
 
+
+## Kondycja
+
+appsettings.json
+
+~~~ json
+
+ "HealthChecks-UI": {
+    "HealthChecks": [
+      {
+        "Name": "Http and UI on single project",
+        "Uri": "http://localhost:5000/healthz"
+      }
+    ],
+    "Webhooks": [],
+    "EvaluationTimeOnSeconds": 10,
+    "MinimumSecondsBetweenFailureNotifications": 60
+  }
+  
+~~~  
