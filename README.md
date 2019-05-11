@@ -479,9 +479,26 @@ public void ConfigureServices(IServiceCollection services)
 
 ~~~
 
+## Signal-R
 
+CustomersHub.cs
 
+~~~ csharp
 
-## Walidacja
+ public class CustomersHub : Hub
+    {
+        public override Task OnConnectedAsync()
+        {
+            return base.OnConnectedAsync();
+        }
+
+        public Task CustomerAdded(Customer customer)
+        {
+            return this.Clients.Others.SendAsync("Added", customer);
+        }
+    }
+}
+~~~
+
 
 
