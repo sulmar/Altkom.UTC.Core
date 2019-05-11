@@ -8,6 +8,12 @@
 dotnet new console
 ~~~~
 
+* Utworzenie nowej aplikacji webowej (pustej)
+
+~~~ bash
+dotnet new web
+~~~~
+
 * Utworzenie nowej aplikacji webapi
 
 ~~~ bash
@@ -329,6 +335,90 @@ https://github.com/sulmar/dotnet-core-jwt
 
 ## Kondycja
 
+### Instalacja
+
+~~~ bash
+ dotnet add package Microsoft.AspNetCore.Diagnostics.HealthChecks
+~~~
+
+
+### Konfiguracja
+
+Startup.cs
+
+~~~ csharp 
+public void ConfigureServices(IServiceCollection services)
+{
+   services.AddHealthChecks();
+}
+
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+ app.UseHealthChecks("/health");
+}
+
+~~~
+
+### Dodanie własnej obsługi
+
+RandomHealthCheck.cs
+
+~~~ csharp
+
+public class RandomHealthCheck  : IHealthCheck
+    {
+        public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+        {
+            if (DateTime.UtcNow.Minute % 2 == 0)
+            {
+                return Task.FromResult(HealthCheckResult.Healthy());
+            }
+
+            return Task.FromResult(HealthCheckResult.Unhealthy(description: "failed"));
+        }
+    }
+~~~
+
+Startup.cs
+
+~~~ csharp
+
+public void ConfigureServices(IServiceCollection services)
+{
+ services.AddHealthChecks()
+             .AddCheck<RandomHealthCheck>("random");
+}
+
+~~~
+
+### Dashboard
+
+Instalacja
+
+~~~ bash
+dotnet add package AspNetCore.HealthChecks.UI
+~~~
+          
+
+Startup.cs
+
+~~~ csharp
+
+public void ConfigureServices(IServiceCollection services)
+{
+   services.AddHealthChecksUI();
+}
+
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    app.UseHealthChecks("/health",  new HealthCheckOptions()
+      {
+          Predicate = _ => true,
+          ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+      });
+}
+~~~
+
 appsettings.json
 
 ~~~ json
@@ -345,7 +435,52 @@ appsettings.json
     "MinimumSecondsBetweenFailureNotifications": 60
   }
   
-~~~  
+~~~
+
+Wskazówka: Przejdź na http://localhost:5000/healthchecks-ui aby zobaczyc panel
+
+### Kondycja SQL Server
+
+~~~ bash
+dotnet add package AspNetCore.HealthChecks.SqlServer 
+~~~
+
+Startup.cs
+
+~~~ csharp
+
+public void ConfigureServices(IServiceCollection services)
+{
+ services.AddHealthChecksUI()
+    .AddSqlServer(Configuration.GetConnectionStrings("MyConnection");
+}
+
+~~~
+
+
+### Kondycja DbContext
+
+~~~ bash
+dotnet add package Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore
+~~~
+
+Startup.cs
+
+~~~ csharp
+
+public void ConfigureServices(IServiceCollection services)
+{
+  services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection"));
+            
+    services.AddHealthChecks()
+            .AddDbContextCheck<AppDbContext>();
+
+}
+
+~~~
+
+
+
 
 ## Walidacja
 
