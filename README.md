@@ -8,6 +8,12 @@
 dotnet new console
 ~~~~
 
+* Utworzenie nowej aplikacji webowej (pustej)
+
+~~~ bash
+dotnet new web
+~~~~
+
 * Utworzenie nowej aplikacji webapi
 
 ~~~ bash
