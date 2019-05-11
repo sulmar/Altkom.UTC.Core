@@ -1,6 +1,8 @@
 ﻿using Altkom.UTC.Core.IServices;
 using Altkom.UTC.Core.Models;
+using Altkom.UTC.Core.Service.Hubs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +18,12 @@ namespace Altkom.UTC.Core.Service.Controllers
     {
         private readonly IDevicesService devicesService;
 
-        public DevicesController(IDevicesService devicesService)
+        private readonly IHubContext<DevicesHub, IDevicesHubClient> hubContext;
+
+        public DevicesController(IDevicesService devicesService, IHubContext<DevicesHub, IDevicesHubClient> hubContext)
         {
             this.devicesService = devicesService;
+            this.hubContext = hubContext;
         }
 
         //[HttpGet]
@@ -94,6 +99,8 @@ namespace Altkom.UTC.Core.Service.Controllers
         public IActionResult Post(Device device)
         {
             devicesService.Add(device);
+
+            hubContext.Clients.All.Added(device);
 
             return CreatedAtRoute(new { device.Id }, device);
         }
