@@ -481,6 +481,8 @@ public void ConfigureServices(IServiceCollection services)
 
 ## Signal-R
 
+### Utworzenie huba
+
 CustomersHub.cs
 
 ~~~ csharp
@@ -500,5 +502,29 @@ CustomersHub.cs
 }
 ~~~
 
+### Utworzenie nadawcy
 
+~~~ bash
+dotnet add package Microsoft.AspNetCore.SignalR.Client
+~~~
+
+~~~ csharp
+
+ private static async Task SendTest()
+        {
+            const string url = "http://localhost:5000/hubs/customers";
+
+            HubConnection connection = new HubConnectionBuilder()
+                .WithUrl(url)
+                .Build();
+                
+            Console.WriteLine("Connecting...");
+            await connection.StartAsync();
+            Console.WriteLine("Connected.");          
+            await connection.SendAsync("CustomerAdded", customer);
+            Console.WriteLine($"Sent {customer.FirstName} {customer.LastName}");
+
+            }
+        }
+~~~
 
