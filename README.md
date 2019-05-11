@@ -502,6 +502,36 @@ CustomersHub.cs
 }
 ~~~
 
+### Utworzenie odbiorcy
+
+~~~ bash
+dotnet add package Microsoft.AspNetCore.SignalR.Client
+~~~
+
+Program.cs
+
+~~~ csharp
+static async Task Main(string[] args)
+        {
+             const string url = "http://localhost:5000/hubs/customers";
+
+            HubConnection connection = new HubConnectionBuilder()
+                .WithUrl(url)
+                .Build();
+
+            Console.WriteLine("Connecting...");
+
+            await connection.StartAsync();
+
+            Console.WriteLine("Connected.");
+
+            connection.On<Customer>("Added",
+                customer => Console.WriteLine($"Received customer {customer.FirstName} {customer.LastName}"));
+
+            }
+        }
+~~~
+
 ### Utworzenie nadawcy
 
 ~~~ bash
