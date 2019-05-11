@@ -8,6 +8,7 @@ using Altkom.UTC.Core.FakeServices.Fakers;
 using Altkom.UTC.Core.IServices;
 using Altkom.UTC.Core.Service.Handlers;
 using Altkom.UTC.Core.Service.HealthChecks;
+using Altkom.UTC.Core.Service.Hubs;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -117,6 +118,9 @@ namespace Altkom.UTC.Core.Service
             services
                 .AddHealthChecksUI();
 
+            services
+                .AddSignalR();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -146,6 +150,9 @@ namespace Altkom.UTC.Core.Service
                 Predicate = _ => true,
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
+
+
+            app.UseSignalR(routes => routes.MapHub<CustomersHub>("/hubs/customers"));
         }
 
         public void ConfigureProduction(IApplicationBuilder app, IHostingEnvironment env)

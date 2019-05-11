@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altkom.UTC.Core.Models", "Altkom.UTC.Core.Models\Altkom.UTC.Core.Models.csproj", "{86DA5CE4-E34F-44F2-9A97-2C9D1DC673C1}"
 EndProject
@@ -13,11 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altkom.UTC.Core.ConsoleClie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altkom.UTC.Core.Service", "Altkom.UTC.Core.Service\Altkom.UTC.Core.Service.csproj", "{560598AF-A14D-4EF9-822F-3164AC6EE6B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.UTC.Core.RestApiClient", "Altkom.UTC.Core.RestApiClient\Altkom.UTC.Core.RestApiClient.csproj", "{68407E7E-DE35-41A4-B37E-277CBD01499B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altkom.UTC.Core.RestApiClient", "Altkom.UTC.Core.RestApiClient\Altkom.UTC.Core.RestApiClient.csproj", "{68407E7E-DE35-41A4-B37E-277CBD01499B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.UTC.Core.RestApiServices", "Altkom.UTC.Core.RestApiServices\Altkom.UTC.Core.RestApiServices.csproj", "{059B0C5A-0A80-4CF0-9F22-22F5025C2B59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altkom.UTC.Core.RestApiServices", "Altkom.UTC.Core.RestApiServices\Altkom.UTC.Core.RestApiServices.csproj", "{059B0C5A-0A80-4CF0-9F22-22F5025C2B59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.UTC.Core.DbServices", "Altkom.UTC.Core.DbServices\Altkom.UTC.Core.DbServices.csproj", "{A52C3D6A-8D8E-4EDC-AD50-24152DFCCBD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altkom.UTC.Core.DbServices", "Altkom.UTC.Core.DbServices\Altkom.UTC.Core.DbServices.csproj", "{A52C3D6A-8D8E-4EDC-AD50-24152DFCCBD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.UTC.Core.ConsoleReceiver", "Altkom.UTC.Core.ConsoleReceiver\Altkom.UTC.Core.ConsoleReceiver.csproj", "{303E173B-7BE5-403C-891E-0491AA234CA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.UTC.Core.ConsoleSender", "Altkom.UTC.Core.ConsoleSender\Altkom.UTC.Core.ConsoleSender.csproj", "{8F2036DC-7A32-4A61-A4C6-68BB262D86F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{A52C3D6A-8D8E-4EDC-AD50-24152DFCCBD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A52C3D6A-8D8E-4EDC-AD50-24152DFCCBD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A52C3D6A-8D8E-4EDC-AD50-24152DFCCBD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{303E173B-7BE5-403C-891E-0491AA234CA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{303E173B-7BE5-403C-891E-0491AA234CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{303E173B-7BE5-403C-891E-0491AA234CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{303E173B-7BE5-403C-891E-0491AA234CA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F2036DC-7A32-4A61-A4C6-68BB262D86F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F2036DC-7A32-4A61-A4C6-68BB262D86F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F2036DC-7A32-4A61-A4C6-68BB262D86F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F2036DC-7A32-4A61-A4C6-68BB262D86F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

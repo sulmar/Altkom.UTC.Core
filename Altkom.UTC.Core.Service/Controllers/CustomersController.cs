@@ -1,8 +1,10 @@
 ﻿using Altkom.UTC.Core.IServices;
 using Altkom.UTC.Core.Models;
 using Altkom.UTC.Core.Models.SearchCriteria;
+using Altkom.UTC.Core.Service.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -25,10 +27,13 @@ namespace Altkom.UTC.Core.Service.Controllers
 
         private readonly ILogger logger;
 
-        public CustomersController(ILogger<CustomersController> logger, ICustomersService customersService)
+        private readonly IHubContext<CustomersHub> hubContext;
+
+        public CustomersController(ILogger<CustomersController> logger, ICustomersService customersService, IHubContext<CustomersHub> hubContext)
         {
             this.logger = logger;
             this.customersService = customersService;
+            this.hubContext = hubContext;
         }
 
         //[HttpGet]
@@ -69,12 +74,13 @@ namespace Altkom.UTC.Core.Service.Controllers
 
 
         [HttpPost]
-        public IActionResult Post( Customer customer)
+        public async Task<IActionResult> Post( Customer customer)
         {
             customersService.Add(customer);
 
-            return CreatedAtRoute(new { Id = customer.Id }, customer);
+            await hubContext.Clients.All.SendAsync("Added", customer);
 
+            return CreatedAtRoute(new { Id = customer.Id }, customer);
         }
 
 
