@@ -20,6 +20,7 @@ namespace Altkom.UTC.Core.ConsoleSender
             Console.ReadKey();
         }
 
+        // dotnet add package Microsoft.AspNetCore.SignalR.Client
         private static async Task SendTest()
         {
             const string url = "http://localhost:5000/hubs/customers";
