@@ -508,9 +508,10 @@ CustomersHub.cs
 dotnet add package Microsoft.AspNetCore.SignalR.Client
 ~~~
 
-~~~ csharp
+Program.cs
 
- private static async Task SendTest()
+~~~ csharp
+static async Task Main(string[] args)
         {
             const string url = "http://localhost:5000/hubs/customers";
 
