@@ -554,17 +554,19 @@ static async Task Main(string[] args)
     await connection.SendAsync("CustomerAdded", customer);
     Console.WriteLine($"Sent {customer.FirstName} {customer.LastName}");
 }
+
 ~~~
+
+
+### Wstrzykiwanie huba
 
 CustomersController.cs
 
 ~~~ csharp
-### Wstrzykiwanie huba
 
  public class CustomersController : ControllerBase
  {
-   private readonly IHubContext<CustomersHub> hubContext;
-   
+    private readonly IHubContext<CustomersHub> hubContext;
    
     public CustomersController(IHubContext<CustomersHub> hubContext)
      {
