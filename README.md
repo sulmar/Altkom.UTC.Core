@@ -553,8 +553,33 @@ static async Task Main(string[] args)
     Console.WriteLine("Connected.");          
     await connection.SendAsync("CustomerAdded", customer);
     Console.WriteLine($"Sent {customer.FirstName} {customer.LastName}");
-
-    }
 }
 ~~~
 
+CustomersController.cs
+
+~~~ csharp
+### Wstrzykiwanie huba
+
+ public class CustomersController : ControllerBase
+ {
+   private readonly IHubContext<CustomersHub> hubContext;
+   
+   
+    public CustomersController(IHubContext<CustomersHub> hubContext)
+     {
+         this.hubContext = hubContext;
+     }
+     
+    [HttpPost]
+     public async Task<IActionResult> Post( Customer customer)
+     {
+         customersService.Add(customer);
+
+         await hubContext.Clients.All.SendAsync("Added", customer);
+
+         return CreatedAtRoute(new { Id = customer.Id }, customer);
+     }
+ }
+
+~~~
