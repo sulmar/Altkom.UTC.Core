@@ -1,4 +1,5 @@
 ﻿using Altkom.UTC.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace Altkom.UTC.Core.Service.Hubs
 {
+
+    [Authorize]
     public class CustomersHub : Hub
     {
         public override Task OnConnectedAsync()
