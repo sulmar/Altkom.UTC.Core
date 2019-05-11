@@ -19,10 +19,8 @@ namespace Altkom.UTC.Core.DbServices
             : base(options)
         {
 
+            this.Database.Migrate();
             // this.Database.EnsureCreated();
-
-             
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -7,8 +7,11 @@ using Altkom.UTC.Core.FakeServices;
 using Altkom.UTC.Core.FakeServices.Fakers;
 using Altkom.UTC.Core.IServices;
 using Altkom.UTC.Core.Service.Handlers;
+using Altkom.UTC.Core.Service.HealthChecks;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -106,6 +109,14 @@ namespace Altkom.UTC.Core.Service
             services
                 .AddSwaggerGen(c => c.SwaggerDoc("v1", new Info { Title = "My Api", Version = "1.0" }));
 
+
+            services
+                .AddHealthChecks()
+                    .AddCheck<RandomHealthCheck>("random");
+
+            services
+                .AddHealthChecksUI();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -129,6 +140,12 @@ namespace Altkom.UTC.Core.Service
             app.UseSwagger();
 
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
+
+            app.UseHealthChecks("/health", new HealthCheckOptions()
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
         }
 
         public void ConfigureProduction(IApplicationBuilder app, IHostingEnvironment env)

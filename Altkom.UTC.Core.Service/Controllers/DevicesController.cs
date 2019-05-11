@@ -75,7 +75,9 @@ namespace Altkom.UTC.Core.Service.Controllers
         [HttpGet()]
         public IActionResult Get([FromQuery] string color, [FromQuery] bool isActive)
         {
-            throw new NotImplementedException();
+            var devices = devicesService.Get();
+
+            return Ok(devices);
         }
 
         [HttpDelete("{id}")]
