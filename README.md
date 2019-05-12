@@ -617,3 +617,48 @@ static async Task Main(string[] args)
 ~~~
 
 
+### Utworzenie silnie typowanego huba
+
+CustomersHub.cs
+
+~~~ csharp
+
+public interface ICustomersHub
+{
+    Task Added(Customer customer);
+}
+
+public class CustomersHub : Hub<ICustomersHub>
+{
+     public Task CustomerAdded(Customer customer)
+     {
+         return this.Clients.Others.Added(customer);
+     } 
+}
+~~~
+
+CustomersController.cs
+
+~~~ csharp
+
+ public class CustomersController : ControllerBase
+ {
+    private readonly IHubContext<CustomersHub, ICustomersHub> hubContext;
+   
+    public CustomersController(IHubContext<CustomersHub, ICustomersHub> hubContext)
+     {
+         this.hubContext = hubContext;
+     }
+     
+    [HttpPost]
+     public async Task<IActionResult> Post( Customer customer)
+     {
+         customersService.Add(customer);
+
+         await hubContext.Clients.All.Added(customer);
+
+         return CreatedAtRoute(new { Id = customer.Id }, customer);
+     }
+ }
+
+~~~
