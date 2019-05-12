@@ -12,9 +12,11 @@ namespace Altkom.UTC.Core.Service.Hubs
     [Authorize]
     public class CustomersHub : Hub
     {
-        public override Task OnConnectedAsync()
+        public override async Task OnConnectedAsync()
         {
-            return base.OnConnectedAsync();
+            await this.Groups.AddToGroupAsync(Context.ConnectionId, groupName: "Developers");
+
+            await base.OnConnectedAsync();
         }
 
         public Task CustomerAdded(Customer customer)
