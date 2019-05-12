@@ -151,6 +151,65 @@ public void ConfigureServices(IServiceCollection services)
    } 
 ~~~
 
+
+## Pobieranie konfiguracji
+
+Plik Startup.cs
+
+~~~ csharp
+ public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)                
+                .AddJsonFile("appsettings.json", optional: false)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddXmlFile("appsettings.xml");
+
+            Configuration = builder.Build();
+        }
+~~~
+
+
+
+### Konfiguracja YAML
+
+- Instalacja
+~~~ bash
+dotnet add package NetEscapades.Configuration.Yaml
+~~~
+
+- Przykładowy plik
+~~~ 
+test: Hello YAML
+
+tunnels:
+  httpbin:
+    proto: http
+~~~ 
+
+- Konfiguracja
+~~~ csharp
+public Startup(IHostingEnvironment env)
+{      
+    var builder = new ConfigurationBuilder()
+        .SetBasePath(env.ContentRootPath)
+        .AddYamlFile("appsettings.yml", optional: false)
+        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+        
+        .AddEnvironmentVariables();
+
+    Configuration = builder.Build();
+}
+~~~
+ 
+- Pobranie konfiguracji
+
+~~~ csharp
+string value = Configuration["test"];
+string proto = Configuration["tunnels:httpbin:proto"];
+~~~
+
 ## Generowanie dokumentacji
 
 ### Instalacja
