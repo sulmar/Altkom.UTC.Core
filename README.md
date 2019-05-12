@@ -210,6 +210,60 @@ string value = Configuration["test"];
 string proto = Configuration["tunnels:httpbin:proto"];
 ~~~
 
+
+## Wstrzykiwanie zależności w aplikacji konsolowej .NET Core
+
+- Instalacja
+~~~ bash
+dotnet add package Microsoft.Extensions.DependencyInjection
+~~~
+
+Program.cs
+
+~~~ csharp
+static void Main(string[] args)
+ {
+      IServiceCollection services = new ServiceCollection();
+
+      services.AddScoped<IFooService, FooService>();
+
+      using(var serviceProvider = services.BuildServiceProvider())
+      {
+         IFooService fooService = serviceProvider.GetService<IFooService>();
+
+         string result = fooService.Get();
+
+         System.Console.WriteLine(result);
+
+      }
+
+     System.Console.WriteLine("Press any key to exit.");
+
+     Console.ReadKey();
+
+ }   
+
+ public interface IFooService
+ {
+     string Get();
+ }
+
+
+ public class FooService : IFooService
+ {
+
+     public string Get() => "Boo";
+ }
+}
+
+
+~~~
+
+
+W repozytorium [https://github.com/sulmar/dotnet-core-console-di/blob/master/Program.cs]
+znajduje się rozbudowany przykład ze wstrzykiwaniem logowania oraz konfiguracji.
+
+
 ## Generowanie dokumentacji
 
 ### Instalacja
