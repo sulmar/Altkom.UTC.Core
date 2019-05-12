@@ -17,9 +17,9 @@ namespace Altkom.UTC.Core.Service.Hubs
     public class DevicesHub : Hub<IDevicesHubClient>
     {
 
-        public void Send(Device device)
+        public Task Send(Device device)
         {
-            this.Clients.All.Added(device);
+            return this.Clients.All.Added(device);
         }
     }
 }

@@ -96,11 +96,11 @@ namespace Altkom.UTC.Core.Service.Controllers
 
         [HttpPost]
         //public IActionResult Post([FromBody] Device device
-        public IActionResult Post(Device device)
+        public async Task<IActionResult> Post(Device device)
         {
             devicesService.Add(device);
 
-            hubContext.Clients.All.Added(device);
+            await hubContext.Clients.All.Added(device);
 
             return CreatedAtRoute(new { device.Id }, device);
         }
