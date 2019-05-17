@@ -59,7 +59,29 @@ dotnet add package <nazwa>
 
 ## Publikacja aplikacji
 
-* Windows
+
+* Framework-dependent deployments (FDD)
+~~~ bash 
+dotnet publish -c Release
+~~~
+
+* Self-contained deployments (SCD)
+~~~ bash
+dotnet publish -c Release -r <IDENTYFIKATOR_ RODOWISKA_URUCHOMIENIOWEGO>
+~~~
+
+* Framework-dependent executables (FDE)
+~~~ bash
+dotnet publish -c Release -r <IDENTYFIKATOR_ RODOWISKA_URUCHOMIENIOWEGO> --self-contained false
+~~~
+
+** Identyfikatory
+- win10-x64
+- linux-x64
+- osx-x64
+
+Przykłady
+
 ~~~ bash
 dotnet publish -c Release -r win10-x64
 ~~~
