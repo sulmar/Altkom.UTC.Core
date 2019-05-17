@@ -75,7 +75,7 @@ dotnet publish -c Release -r <IDENTYFIKATOR_ RODOWISKA_URUCHOMIENIOWEGO>
 dotnet publish -c Release -r <IDENTYFIKATOR_ RODOWISKA_URUCHOMIENIOWEGO> --self-contained false
 ~~~
 
-** Identyfikatory
+### Identyfikatory
 - win10-x64
 - linux-x64
 - osx-x64
@@ -84,15 +84,7 @@ Przykłady
 
 ~~~ bash
 dotnet publish -c Release -r win10-x64
-~~~
-
-* Linux
-~~~ bash
 dotnet publish -c Release -r linux-x64
-~~~
-
-* MacOS
-~~~ bash
 dotnet publish -c Release -r osx-x64
 ~~~
 
