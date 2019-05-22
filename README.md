@@ -811,3 +811,75 @@ public async Task RemoveFromGroup(string groupName)
 }
 
 ~~~
+
+
+## Tworzenie własnej warstwy pośredniej (Middleware)
+
+Na przykładzie przekazywania formatu poprzez URL, np. http://localhost:5000/api/values?format=application/xml
+
+RequestAcceptMiddleware.cs
+
+~~~ csharp
+ public class RequestAcceptMiddleware
+    {
+        private readonly RequestDelegate next;
+
+        public RequestAcceptMiddleware(RequestDelegate next)
+        {
+            this.next = next;
+        }
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            var formatQuery = context.Request.Query["format"];
+
+            if (!string.IsNullOrWhiteSpace(formatQuery))
+            {
+                context.Request.Headers.Remove("Accept");
+                context.Request.Headers.Append("Accept", new string[] { formatQuery });
+            }
+
+            // Call the next delegate/middleware in the pipeline
+            await next(context);
+
+        }
+    }
+    
+  
+  ~~~
+  
+   Startup.cs
+ 
+  
+  ~~~ csharp 
+  public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+  {
+       app.UseMiddleware<RequestAcceptMiddleware>();
+       
+  }
+  
+  
+  - Zastosowanie metody rozszerzającej
+  
+  RequestAcceptMiddlewareExtensions.cs
+  
+  ~~~ csharp 
+    public static class RequestAcceptMiddlewareExtensions
+    {
+        public static IApplicationBuilder UseRequestAccept(
+            this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<RequestAcceptMiddleware>();
+        }
+    }
+  ~~~
+  
+  Startup.cs
+ 
+  ~~~ csharp 
+  public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+  {
+       app.UseRequestAccept();
+  }
+  
+  
